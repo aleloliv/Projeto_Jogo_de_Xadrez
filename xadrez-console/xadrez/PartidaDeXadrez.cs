@@ -148,11 +148,52 @@ namespace xadrez
             {
                 if ((p.cor == Cor.Branca && destino.linha == 0) || (p.cor == Cor.Preta && destino.linha == 7))
                 {
-                    p = tab.retirarPeca(destino);
-                    pecas.Remove(p);
-                    Peca dama = new Dama(tab, p.cor);
-                    tab.colocarPeca(dama, destino);
-                    pecas.Add(dama);
+                    Console.Write("Você ganhou uma promoção! Escolha uma peça (D/T/B/C): ");
+                    char pecaPromocao = char.Parse(Console.ReadLine());
+                    while (pecaPromocao != 'D' || pecaPromocao != 'T' || pecaPromocao != 'B' || pecaPromocao != 'C')
+                    {
+                        if (pecaPromocao == 'D')
+                        {
+                            p = tab.retirarPeca(destino);
+                            pecas.Remove(p);
+                            Peca dama = new Dama(tab, p.cor);
+                            tab.colocarPeca(dama, destino);
+                            pecas.Add(dama);
+                            break;
+                        }
+                        else if (pecaPromocao == 'T')
+                        {
+                            p = tab.retirarPeca(destino);
+                            pecas.Remove(p);
+                            Peca torre = new Torre(tab, p.cor);
+                            tab.colocarPeca(torre, destino);
+                            pecas.Add(torre);
+                            break;
+                        }
+                        else if (pecaPromocao == 'B')
+                        {
+                            p = tab.retirarPeca(destino);
+                            pecas.Remove(p);
+                            Peca bispo = new Bispo(tab, p.cor);
+                            tab.colocarPeca(bispo, destino);
+                            pecas.Add(bispo);
+                            break;
+                        }
+                        else if (pecaPromocao == 'C')
+                        {
+                            p = tab.retirarPeca(destino);
+                            pecas.Remove(p);
+                            Peca cavalo = new Cavalo(tab, p.cor);
+                            tab.colocarPeca(cavalo, destino);
+                            pecas.Add(cavalo);
+                            break;
+                        }
+                        else
+                        {
+                            throw new TabuleiroException("Peça inválida! Escolha 'D', 'T', 'B' ou 'C': ");
+                            pecaPromocao = char.Parse(Console.ReadLine());
+                        }
+                    }
                 }
             }
 
